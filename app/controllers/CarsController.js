@@ -18,6 +18,7 @@ export class HousesController {
   }
 
   createHouseListing() {
+    // FIXME what's wrong with this event?!
     event.preventDefault() // prevent the default form submission event
     const formElm = event.target
     console.log('Creating a House', formElm);
@@ -47,7 +48,7 @@ export class HousesController {
     const typingChallenge = prompt('Please type "I missed out!" to confirm this action')
     if (typingChallenge != 'Hell Yeah') return
 
-    carsService.deleteHouseListing(houseId)
+    housesService.deleteHouseListing(houseId)
     this.drawHouses()
   }
 }
