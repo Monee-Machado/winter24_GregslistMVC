@@ -9,24 +9,24 @@ class HousesService {
     console.log('service creating house', houseData);
     const createdCard = new House(houseData)
     AppState.houses.push(createdCard)
-    console.log('AppState cars', AppState.houses);
-    this.saveCars() // as i add cars, save to localStorage
+    console.log('AppState houses', AppState.houses);
+    this.saveHouses() // as i add cars, save to localStorage
   }
 
 
-  deleteCarListing(carId) {
-    console.log('service delteting', carId);
-    const carToDelete = AppState.cars.find(car => car.id == carId)
-    console.log('🔥🚙', carToDelete);
-    // const indexToRemove = AppState.cars.findIndex(car => car.id == carId)
-    const indexToRemove = AppState.cars.indexOf(carToDelete)
-    AppState.cars.splice(indexToRemove, 1)
-    this.saveCars()
+  deleteHouseListing(houseId) {
+    console.log('service deleting', houseId);
+    const houseToDelete = AppState.houses.find(house => house.id == houseId)
+    console.log('🔥🏠', houseToDelete);
+    // const indexToRemove = AppState.houses.findIndex(houses => house.id == houseId)
+    const indexToRemove = AppState.houses.indexOf(houseToDelete)
+    AppState.houses.splice(indexToRemove, 1)
+    this.saveHouses()
   }
 
 
   saveHouses() {
-    let stringData = JSON.stringify(AppState.house)
+    let stringData = JSON.stringify(AppState.houses)
     localStorage.setItem('gregslist_houses', stringData)
   }
 

@@ -4,12 +4,12 @@ import { generateId } from "../utils/GenerateId.js"
 export class House {
   constructor(data) {
     this.id = generateId()
-    this.make = data.make
-    this.model = data.model
+    this.rooms = data.rooms
+    this.listings = data.listings
     this.year = data.year
-    this.color = data.color
+    // this.color = data.color
     this.imgUrl = data.imgUrl
-    this.mileage = data.mileage || 'Not listed' // works as a sort of default if not milage was listed
+    this.squareFt = data.squareFt || 'Not listed' // works as a sort of default if not milage was listed
     // NOTE ternary statement
     // condition ?  if true : if false
     this.listedAt = data.listedAt == undefined ? new Date() : new Date(data.listedAt)
@@ -25,19 +25,17 @@ export class House {
              alt="">
            <div class="card-body">
              <p class="text-center fw-bold">
-               ${this.make} ${this.model} ${this.year}
+               ${this.rooms} ${this.listings} ${this.year}
              </p>
+
              <p class="mb-0">
-               ${this.color}
-             </p>
-             <p class="mb-0">
-               ${this.mileage}
+               ${this.squareFt}
              </p>
              <p class="mb-0">
                ${this.FormattedTime}
              </p>
              <div>
-              <button onclick="app.CarsController.deleteCarListing('${this.id}')" class="btn btn-danger w-100" title="Delete ${this.make} ${this.model}"><i class="mdi mdi-delete-empty"></i></button>
+              <button onclick="app.CarsController.deleteCarListing('${this.id}')" class="btn btn-danger w-100" title="Delete ${this.rooms} ${this.listings}"><i class="mdi mdi-delete-empty"></i></button>
              </div>
            </div>
          </div>
@@ -45,6 +43,7 @@ export class House {
     `
   }
 
+  // NOTE formatted time as a form(?) elaborate!
   get FormattedTime() {
     return this.listedAt.toLocaleDateString('en-us', { weekday: 'short', year: 'numeric', month: 'numeric', day: 'numeric', minute: '2-digit', second: "2-digit" })
   }
