@@ -1,15 +1,15 @@
 import { AppState } from "../AppState.js";
-import { Car } from "../models/Car.js";
+import { House } from "../models/Car.js";
 
 
 
-class CarsService {
+class HousesService {
 
-  createCarListing(carData) { // carData is "RAW" data, it does not have it's "backing class"
-    console.log('service creating car', carData);
-    const createdCard = new Car(carData)
-    AppState.cars.push(createdCard)
-    console.log('AppState cars', AppState.cars);
+  createHouseListing(houseData) { // carData is "RAW" data, it does not have it's "backing class"
+    console.log('service creating house', houseData);
+    const createdCard = new House(houseData)
+    AppState.houses.push(createdCard)
+    console.log('AppState cars', AppState.houses);
     this.saveCars() // as i add cars, save to localStorage
   }
 
@@ -25,27 +25,27 @@ class CarsService {
   }
 
 
-  saveCars() {
-    let stringData = JSON.stringify(AppState.cars)
-    localStorage.setItem('gregslist_cars', stringData)
+  saveHouses() {
+    let stringData = JSON.stringify(AppState.house)
+    localStorage.setItem('gregslist_houses', stringData)
   }
 
 
   // This is called from the constructor in the Controller
-  loadCars() {
-    let stringData = localStorage.getItem('gregslist_cars')
+  loadHouses() {
+    let stringData = localStorage.getItem('gregslist_houses')
     console.log('🧵💾', stringData);
-    let carsData = JSON.parse(stringData)
-    console.log('🚙🚙💾', carsData);
+    let housesData = JSON.parse(stringData)
+    console.log('🚙🚙💾', housesData);
     // AppState.cars = carsData
     // carsData.forEach(carData => AppState.cars.push(new Car(carData))) kinda works ish
     // new arr ................POJO transforms into "new Car()"
-    if (!carsData) return // don't map over nothing, if the app has no storage
+    if (!housesData) return // don't map over nothing, if the app has no storage
     // if (carsData == null) return // don't map over nothing, if the app has no storage
-    const cars = carsData.map(carData => new Car(carData))
-    console.log('✨🚙🚙', cars);
-    AppState.cars = cars // overwrite the data in the AppState, with the data from localStorage
+    const houses = housesData.map(houseData => new House(houseData))
+    console.log('✨🏠🏠', houses);
+    AppState.houses = houses // overwrite the data in the AppState, with the data from localStorage
   }
 }
 
-export const carsService = new CarsService()
+export const housesService = new HousesService()

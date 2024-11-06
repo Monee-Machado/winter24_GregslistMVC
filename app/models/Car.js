@@ -1,7 +1,7 @@
 import { generateId } from "../utils/GenerateId.js"
 
 
-export class Car {
+export class House {
   constructor(data) {
     this.id = generateId()
     this.make = data.make

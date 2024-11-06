@@ -2,50 +2,52 @@ import { AppState } from "../AppState.js";
 import { carsService } from "../services/CarsService.js";
 
 
-export class CarsController {
+export class HousesController {
   constructor() {
-    console.log('🚙🎮');
-    carsService.loadCars()
-    this.drawCars()
+    console.log('🏠🎮');
+    housesService.loadHouses()
+    this.drawHouses()
   }
 
 
-  drawCars() {
-    console.log('✏️🚙🚙');
-    const carsListingsElm = document.getElementById('car-listings')
-    carsListingsElm.innerHTML = ''
-    AppState.cars.forEach(car => carsListingsElm.innerHTML += car.Card)
+  drawHouses() {
+    console.log('✏️🏠🏠');
+    const houseListingsElm = document.getElementById('house-listings')
+    houseListingsElm.innerHTML = ''
+    AppState.houses.forEach(house => houseListingsElm.innerHTML += house.Card)
   }
 
-  createCarListing() {
+  createHouseListing() {
     event.preventDefault() // prevent the default form submission event
     const formElm = event.target
-    console.log('Creating a Car', formElm);
-    console.log(formElm.make.value);
+    console.log('Creating a House', formElm);
+    console.log(formElm.rooms.value);
     // NOTE collect all the data from the form!
     const formData = {
-      make: formElm.make.value,
-      model: formElm.model.value,
+      rooms: formElm.rooms.value,
+      listings: formElm.listings.value,
       year: formElm.year.value,
-      color: formElm.color.value,
+      squareFt: formElm.squareFt.value
       imgUrl: formElm.imgUrl.value,
-      mileage: formElm.mileage.value,
+      price: formElm.price.value,
     }
     console.log(formData); // check to see if it's all there
-    carsService.createCarListing(formData)
-    this.drawCars()
+    housesService.createHouseListing(formData)
+    this.drawHouses()
   }
 
-  deleteCarListing(carId) {
-    console.log('🔥deleting!', carId);
-    const confirmed = confirm("Are you sure you want to delete this? this action cannot be REVERED. It will be gone forevah!")
+  deleteHouseListing(houseId) {
+    console.log('🔥deleting!', houseId);
+    const confirmed = confirm("Are you sure you want to delete this? this action cannot be REVERSED. You will REGRET IT!")
     if (!confirmed) return
-    const areYourSureSure = confirm("Are you absolutely Sure?")
+    const areYourSureSure = confirm("Are you sure?")
     if (!areYourSureSure) return
-    const typingChallange = prompt('Please type "Hell Yeah" to confirm this action')
-    if (typingChallange != 'Hell Yeah') return
+    const areYouSureSureSure = confirm("Are you FOR REAL?!")
+    if (!areYouSureSureSure) return
+    const typingChallenge = prompt('Please type "I missed out!" to confirm this action')
+    if (typingChallenge != 'Hell Yeah') return
 
-    carsService.deleteCarListing(carId)
-    this.drawCars()
+    carsService.deleteHouseListing(houseId)
+    this.drawHouses()
   }
 }
